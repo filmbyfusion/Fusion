@@ -18,13 +18,12 @@
         }
 
         body {
-            /* 3D CHROME TEXTURE */
-            background-color: #b8b8ba;
-            background-image: 
-                linear-gradient(135deg, #e0e0e2 0%, #ffffff 15%, #b8b8ba 30%, #7a7a7c 45%, #cfcfd1 60%, #ffffff 85%, #a1a1a3 100%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            background-blend-mode: soft-light;
-            background-attachment: fixed;
+            /* USING YOUR CHROME.JPG AS THE BACKGROUND */
+            background-image: url('images/Chrome.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps the liquid metal still while you scroll */
+            background-color: #b8b8ba; /* Fallback color */
             color: #1a1a1a;
             overflow-x: hidden;
         }
@@ -39,42 +38,42 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 9999; /* Highest priority */
-            pointer-events: none; /* Allows clicking through the empty space of the nav bar */
+            z-index: 9999;
+            pointer-events: none;
         }
 
         .logo {
             width: 476px; 
             height: auto;
             display: block;
-            pointer-events: auto; /* Re-enable clicking for logo */
+            pointer-events: auto;
         }
 
         .nav-links {
             display: flex;
             gap: 50px;
-            pointer-events: auto; /* Re-enable clicking for links */
+            pointer-events: auto;
         }
 
         .nav-link {
             text-decoration: none;
-            color: #ffffff; /* Explicitly White */
+            color: #ffffff; 
             font-size: 22.4px; 
             letter-spacing: 2px;
             transition: 0.3s;
             font-weight: 700; 
             text-transform: uppercase;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            /* Added shadow to help white text pop against light chrome areas */
+            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
         }
 
         .nav-link:hover {
             opacity: 0.6;
-            color: #ffffff;
         }
 
         /* CONTENT SPACING */
         .main {
-            padding: 550px 60px 100px; /* Large padding to clear the 1.7x logo */
+            padding: 550px 60px 100px;
             width: 80%;
         }
 
@@ -90,13 +89,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 700;
-            border-bottom: 2px solid rgba(0,0,0,0.15);
+            border-bottom: 2px solid rgba(0,0,0,0.1);
         }
 
         .film:hover {
             color: #ffffff; 
             transform: translateX(20px);
-            text-shadow: 0 0 25px rgba(255,255,255,0.5);
+            text-shadow: 0 0 30px rgba(255,255,255,0.6);
         }
 
         .year {
@@ -109,7 +108,8 @@
         /* TEAM SECTION */
         .team-section {
             padding: 120px 60px;
-            background: rgba(0,0,0,0.03);
+            background: rgba(255, 255, 255, 0.1); /* Subtle glass effect over the chrome image */
+            backdrop-filter: blur(10px); /* Blurs the background image slightly behind the cards */
         }
 
         .team-title {
@@ -139,7 +139,7 @@
             aspect-ratio: 4/5;
             overflow: hidden;
             margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .member-img {
@@ -188,6 +188,7 @@
             padding: 12px 25px;
             display: inline-block;
             transition: 0.3s;
+            background: rgba(0,0,0,0.1);
         }
 
         .portfolio-btn:hover {
@@ -203,7 +204,7 @@
             opacity: 0;
             transition: opacity .4s ease;
             z-index: 100;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
         }
 
         .footer {
