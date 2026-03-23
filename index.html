@@ -10,24 +10,31 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Applied Poppins globally */
             font-family: 'Poppins', sans-serif;
         }
 
         html {
             scroll-behavior: smooth;
-            cursor: auto; /* Default cursor restored */
         }
 
         body {
-            /* SHINY CHROME WITH BRUSHED TEXTURE */
-            background: 
-                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(135deg, #e0e0e2 0%, #b8b8ba 25%, #d1d1d3 50%, #959597 75%, #c0c0c2 100%);
-            background-size: 4px 4px, 4px 4px, 100% 100%;
+            /* 3D CHROME TEXTURE: Uses a mix of sharp gradients and a noise overlay */
+            background-color: #b8b8ba;
+            background-image: 
+                /* High-gloss 3D reflections */
+                linear-gradient(135deg, 
+                    #e0e0e2 0%, 
+                    #ffffff 15%, 
+                    #b8b8ba 30%, 
+                    #7a7a7c 45%, 
+                    #cfcfd1 60%, 
+                    #ffffff 85%, 
+                    #a1a1a3 100%),
+                /* Subtle grain texture overlay */
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: soft-light;
             background-attachment: fixed;
-            color: #1a1a1a; /* Deep charcoal for readability on chrome */
+            color: #1a1a1a;
             overflow-x: hidden;
         }
 
@@ -39,38 +46,37 @@
             justify-content: space-between;
             align-items: center;
             z-index: 10;
-            /* Subtle glassmorphism so nav stays visible during scroll */
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
+            /* Removed blur effect (backdrop-filter) */
+            background: transparent; 
         }
 
-        /* LOGO: 1.7x size */
         .logo {
-            width: 476px; 
+            width: 476px; /* 1.7x Size */
             height: auto;
             display: block;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 50px;
         }
 
         .nav-link {
             text-decoration: none;
             color: inherit;
-            font-size: 16px;
+            /* 1.4x Size Increase: 16px * 1.4 = ~22px */
+            font-size: 22.4px; 
             letter-spacing: 2px;
             transition: 0.3s;
-            opacity: 0.7;
-            font-weight: 600;
+            opacity: 1; /* Full opacity to match film titles */
+            font-weight: 700; /* Bold to match film titles */
+            text-transform: uppercase;
         }
 
-        /* Hover: White instead of Pink */
+        /* Hover: Turns white with a glow, matching the film titles logic */
         .nav-link:hover {
-            opacity: 1;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            text-shadow: 0 0 15px rgba(255,255,255,0.6);
         }
 
         .main {
@@ -90,10 +96,9 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 700;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(0,0,0,0.15); /* Slightly thicker border for 3D feel */
         }
 
-        /* Hover: White instead of Pink */
         .film:hover {
             color: #ffffff; 
             transform: translateX(15px);
@@ -103,8 +108,8 @@
         .year {
             font-size: 14px;
             margin-left: 15px;
-            opacity: .5;
-            font-weight: 300;
+            opacity: .6;
+            font-weight: 400;
         }
 
         .preview {
@@ -127,12 +132,12 @@
             padding: 150px 60px 80px;
             font-size: 14px;
             letter-spacing: 2px;
-            font-weight: 400;
         }
 
         @media(max-width:900px) {
             .logo { width: 280px; } 
-            .main { padding-top: 250px; width: 90%; }
+            .nav-link { font-size: 18px; }
+            .main { padding-top: 250px; width: 95%; }
             .film { font-size: 32px; }
             .preview { display: none; }
         }
@@ -172,9 +177,9 @@
     </div>
 
     <div class="footer" id="footer-contact">
-        <div id="team" style="margin-bottom: 40px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
-            <h3 style="margin-bottom: 10px;">TEAM</h3>
-            <p style="opacity: 0.6;">Production Collective</p>
+        <div id="team" style="margin-bottom: 40px; border-top: 2px solid rgba(0,0,0,0.15); padding-top: 40px;">
+            <h3 style="margin-bottom: 10px; text-transform: uppercase;">TEAM</h3>
+            <p style="opacity: 0.7;">Production Collective</p>
         </div>
         <p>filmbyfusion@gmail.com</p>
     </div>
@@ -184,7 +189,6 @@
         const previewImg = preview.querySelector('img');
         const films = document.querySelectorAll('.film');
 
-        // Track mouse for the preview image
         window.addEventListener('mousemove', (e) => {
             const x = e.clientX;
             const y = e.clientY;
@@ -198,7 +202,6 @@
             });
         });
 
-        // Hover logic for Previews
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
                 const imgPath = film.getAttribute('data-img');
