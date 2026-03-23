@@ -18,12 +18,13 @@
         }
 
         body {
-            background: #000; 
-            color: #fff;
+            /* SHINY CHROME GRADIENT */
+            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #d1d1d6 45%, #8e8e93 100%);
+            background-attachment: fixed;
+            color: #000; /* Black text looks better on Chrome than white */
             overflow-x: hidden;
         }
 
-        /* Custom Arrow Cursor */
         #custom-cursor {
             position: fixed;
             top: 0;
@@ -32,7 +33,7 @@
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 18px solid #fff;
+            border-bottom: 18px solid #000; /* Black cursor to match text */
             transform: rotate(-30deg);
             pointer-events: none;
             z-index: 9999;
@@ -41,33 +42,43 @@
         .nav {
             position: fixed;
             width: 100%;
-            padding: 40px 60px;
+            padding: 20px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
         }
 
-        /* Adjusted for the logo in the images folder */
+        /* LOGO: 1.7x size (476px) */
         .logo {
-            width: 280px; 
+            width: 476px; 
             height: auto;
             display: block;
         }
 
-        .contact-link {
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
             text-decoration: none;
             color: inherit;
             font-size: 18px;
             letter-spacing: 3px;
-            transition: opacity 0.3s;
-            opacity: 0.7;
+            transition: 0.3s;
+            opacity: 0.8;
+            font-weight: 600;
         }
 
-        .contact-link:hover { opacity: 1; }
+        /* TEAM & CONTACT hover color matches Film Titles */
+        .nav-link:hover {
+            opacity: 1;
+            color: #ff2bd6; 
+        }
 
         .main {
-            padding: 280px 60px 100px;
+            padding: 450px 60px 100px; /* Extra padding for the massive logo */
             width: 60%;
         }
 
@@ -82,6 +93,7 @@
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: 600;
         }
 
         .film:hover {
@@ -92,7 +104,7 @@
         .year {
             font-size: 14px;
             margin-left: 15px;
-            opacity: .4;
+            opacity: .5;
         }
 
         .preview {
@@ -102,7 +114,7 @@
             opacity: 0;
             transition: opacity .2s ease-out;
             z-index: 100;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
         .preview img {
@@ -114,13 +126,11 @@
             padding: 200px 60px 100px;
             font-size: 14px;
             letter-spacing: 3px;
-            opacity: .6;
         }
 
         @media(max-width:900px) {
-            .logo { width: 160px; }
-            .main { width: 100%; padding: 180px 30px; }
-            .film { font-size: 28px; }
+            .logo { width: 250px; } 
+            .main { padding-top: 250px; }
             .preview { display: none; }
             html, body { cursor: auto; }
             #custom-cursor { display: none; }
@@ -133,7 +143,11 @@
 
     <div class="nav">
         <img src="images/Fusionlogo_v2.png" alt="FUSION" class="logo">
-        <a href="#footer-contact" class="contact-link">CONTACT</a>
+        
+        <div class="nav-links">
+            <a href="#team" class="nav-link">TEAM</a>
+            <a href="#footer-contact" class="nav-link">CONTACT</a>
+        </div>
     </div>
 
     <div class="main">
@@ -142,7 +156,7 @@
                 Raymond Leigh <span class="year">2026</span>
             </div>
         </a>
-        <a href="https://vimeo.com/1122986082?fl=pl&fe=cm" target="_blank" class="film-link">
+        <a href="https://vimeo.com/1122986082" target="_blank" class="film-link">
             <div class="film" data-img="images/Arlo.png">
                 Arlo <span class="year">2025</span>
             </div>
@@ -159,6 +173,7 @@
     </div>
 
     <div class="footer" id="footer-contact">
+        <p id="team" style="margin-bottom: 40px; opacity: 0.5;">TEAM SECTION CONTENT GOES HERE</p>
         filmbyfusion@gmail.com
     </div>
 
@@ -174,9 +189,10 @@
             
             requestAnimationFrame(() => {
                 if (cursor) {
-                    cursor.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(-30deg)`;
+                    cursor.style.left = x + 'px';
+                    cursor.style.top = y + 'px';
                 }
-                if (preview) {
+                if (preview && preview.style.opacity === '1') {
                     const yOffset = preview.offsetHeight / 2;
                     preview.style.left = (x + 45) + 'px';
                     preview.style.top = (y - yOffset) + 'px';
@@ -186,11 +202,8 @@
 
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                const imgPath = film.getAttribute('data-img');
-                if (imgPath) {
-                    previewImg.src = imgPath;
-                    preview.style.opacity = '1';
-                }
+                previewImg.src = film.getAttribute('data-img');
+                preview.style.opacity = '1';
             });
             film.addEventListener('mouseleave', () => {
                 preview.style.opacity = '0';
