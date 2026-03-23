@@ -6,6 +6,7 @@
     <title>FUSION | Production Co.</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 1. RESET & BASE */
         * {
             margin: 0;
             padding: 0;
@@ -14,23 +15,15 @@
         }
 
         html, body {
+            width: 100%;
             height: 100%;
-            scroll-behavior: smooth;
+            background-color: #999;
         }
 
         body {
-            /* 3D BRUSHED CHROME TEXTURE (No image required) */
-            background-color: #999;
+            /* HIGH-TEXTURE CHROME BACKGROUND */
             background-image: 
-                /* The "Shine" */
-                linear-gradient(115deg, 
-                    rgba(255,255,255,0.8) 0%, 
-                    rgba(150,150,150,0.2) 20%, 
-                    rgba(255,255,255,0.8) 40%, 
-                    rgba(100,100,100,0.5) 60%, 
-                    rgba(255,255,255,0.8) 80%, 
-                    rgba(150,150,150,0.2) 100%),
-                /* The "Grain" */
+                linear-gradient(115deg, rgba(255,255,255,0.8) 0%, rgba(150,150,150,0.2) 20%, rgba(255,255,255,0.8) 40%, rgba(100,100,100,0.5) 60%, rgba(255,255,255,0.8) 80%, rgba(150,150,150,0.2) 100%),
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-blend-mode: overlay;
             background-attachment: fixed;
@@ -38,58 +31,59 @@
             overflow-x: hidden;
         }
 
-        /* FIXED NAVIGATION - THIS WILL NOT MOVE */
-        nav.sticky-header {
-            position: fixed;
+        /* 2. THE LOGO & NAV - FORCED TOP-LEVEL FIX */
+        .fixed-nav-container {
+            position: fixed; /* This pins it to the viewport, not the document */
             top: 0;
             left: 0;
             width: 100%;
-            height: 180px; /* Defined height to prevent collapsing */
             padding: 40px 60px;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Align to top */
-            z-index: 9999;
-            pointer-events: none; /* Allows scrolling if mouse is over empty space */
+            align-items: flex-start;
+            z-index: 99999; /* Overrides everything */
+            pointer-events: none; /* Allows scrolling 'through' the bar */
         }
 
         .logo {
-            width: 476px; /* 1.7x Size */
+            width: 476px; /* 1.7x original size */
             height: auto;
             display: block;
-            pointer-events: auto;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            pointer-events: auto; /* Makes logo clickable */
         }
 
         .nav-links {
             display: flex;
             gap: 50px;
-            pointer-events: auto;
-            padding-top: 10px; /* Alignment with logo text */
+            pointer-events: auto; /* Makes links clickable */
+            padding-top: 15px;
         }
 
         .nav-link {
             text-decoration: none;
-            color: #ffffff; 
-            font-size: 22.4px; 
+            color: #ffffff; /* Forced White */
+            font-size: 22.4px; /* 1.4x size */
             letter-spacing: 2px;
-            font-weight: 700; 
+            font-weight: 700;
             text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            transition: opacity 0.3s;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
 
         .nav-link:hover {
             opacity: 0.5;
         }
 
-        /* MAIN CONTENT AREA */
-        .main {
-            /* This padding ensures content starts AFTER the logo */
-            padding: 350px 60px 100px;
+        /* 3. CONTENT AREAS */
+        .content-wrapper {
             position: relative;
-            z-index: 1;
-            max-width: 1400px;
+            width: 100%;
+            z-index: 1; /* Sits behind the fixed-nav-container */
+        }
+
+        .main {
+            padding: 500px 60px 100px; /* Pushes list below the massive logo */
+            max-width: 1600px;
         }
 
         .film-link {
@@ -98,77 +92,77 @@
         }
 
         .film {
-            font-size: clamp(32px, 5vw, 64px);
-            padding: 40px 0;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s;
-            text-transform: uppercase;
+            font-size: clamp(36px, 6vw, 70px);
+            padding: 45px 0;
             font-weight: 700;
+            text-transform: uppercase;
             border-bottom: 2px solid rgba(0,0,0,0.1);
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .film:hover {
-            color: #ffffff; 
-            transform: translateX(20px);
+            color: #ffffff;
+            transform: translateX(30px);
             text-shadow: 0 0 30px rgba(255,255,255,0.6);
         }
 
         .year {
-            font-size: 0.3em;
-            vertical-align: middle;
+            font-size: 0.25em;
             margin-left: 20px;
             opacity: 0.4;
+            vertical-align: middle;
         }
 
-        /* TEAM SECTION */
+        /* 4. TEAM SECTION */
         .team-section {
             padding: 120px 60px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            position: relative;
-            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .team-title {
             font-size: 48px;
-            margin-bottom: 60px;
-            letter-spacing: 2px;
+            margin-bottom: 80px;
+            text-transform: uppercase;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
         }
 
         .member-card {
-            background: rgba(0,0,0,0.05);
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
         }
 
         .member-img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            margin-bottom: 20px;
             filter: grayscale(100%);
             transition: 0.5s;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .member-card:hover .member-img {
             filter: grayscale(0%);
+            transform: scale(1.02);
         }
 
         .portfolio-btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 25px;
+            padding: 12px 28px;
             border: 1px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
+            letter-spacing: 2px;
             transition: 0.3s;
         }
 
@@ -177,90 +171,92 @@
             color: #000;
         }
 
-        /* PREVIEW POPUP */
+        /* 5. PREVIEW & FOOTER */
         .preview {
             position: fixed;
-            width: 500px;
+            width: 550px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity .3s ease;
-            z-index: 500;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            transition: opacity .3s;
+            z-index: 100;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
         }
 
         .footer {
-            padding: 100px 60px;
+            padding: 150px 60px 80px;
             text-align: center;
-            font-size: 12px;
+            opacity: 0.5;
             letter-spacing: 3px;
         }
 
-        @media(max-width:900px) {
-            nav.sticky-header { padding: 20px; height: auto; }
-            .logo { width: 240px; }
-            .nav-link { font-size: 16px; }
-            .main { padding-top: 200px; }
+        @media(max-width:1000px) {
+            .fixed-nav-container { padding: 20px 30px; }
+            .logo { width: 280px; }
+            .nav-link { font-size: 18px; }
+            .main { padding-top: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="sticky-header">
+    <div class="fixed-nav-container">
         <img src="images/Fusionlogo_v2.png" alt="FUSION" class="logo">
         <div class="nav-links">
             <a href="#team" class="nav-link">TEAM</a>
             <a href="#footer-contact" class="nav-link">CONTACT</a>
         </div>
-    </nav>
-
-    <div class="main">
-        <a href="https://www.youtube.com/watch?v=cB0-g6u-kO4" target="_blank" class="film-link">
-            <div class="film" data-img="images/RaymondLeigh.png">
-                Raymond Leigh <span class="year">2026</span>
-            </div>
-        </a>
-        <a href="https://vimeo.com/1122986082" target="_blank" class="film-link">
-            <div class="film" data-img="images/Arlo.png">
-                Arlo <span class="year">2025</span>
-            </div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=rN5POyiLMTM" target="_blank" class="film-link">
-            <div class="film" data-img="images/Mutek.png">
-                MUTEK <span class="year">2024</span>
-            </div>
-        </a>
     </div>
 
-    <section class="team-section" id="team">
-        <h2 class="team-title">TEAM</h2>
-        <div class="team-grid">
-            <div class="member-card">
-                <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
-                <h3>Jérémie Urbain</h3>
-                <p>Creative Director. Industrial specialist.</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
-            </div>
-            <div class="member-card">
-                <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
-                <h3>Samuel Brichet</h3>
-                <p>Lead Editor. Rhythm & Motion.</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
-            </div>
-            <div class="member-card">
-                <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
-                <h3>Alec Nikoghossian</h3>
-                <p>Producer. Cinematic Soundscapes.</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
-            </div>
+    <div class="content-wrapper">
+        <div class="main">
+            <a href="https://www.youtube.com/watch?v=cB0-g6u-kO4" target="_blank" class="film-link">
+                <div class="film" data-img="images/RaymondLeigh.png">
+                    Raymond Leigh <span class="year">2026</span>
+                </div>
+            </a>
+            <a href="https://vimeo.com/1122986082" target="_blank" class="film-link">
+                <div class="film" data-img="images/Arlo.png">
+                    Arlo <span class="year">2025</span>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=rN5POyiLMTM" target="_blank" class="film-link">
+                <div class="film" data-img="images/Mutek.png">
+                    MUTEK <span class="year">2024</span>
+                </div>
+            </a>
         </div>
-    </section>
+
+        <section class="team-section" id="team">
+            <h2 class="team-title">TEAM</h2>
+            <div class="team-grid">
+                <div class="member-card">
+                    <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
+                    <h3>Jérémie Urbain</h3>
+                    <p>Creative Director & Cinematographer</p>
+                    <a href="#" class="portfolio-btn">Portfolio</a>
+                </div>
+                <div class="member-card">
+                    <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
+                    <h3>Samuel Brichet</h3>
+                    <p>Lead Editor & Motion Design</p>
+                    <a href="#" class="portfolio-btn">Portfolio</a>
+                </div>
+                <div class="member-card">
+                    <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
+                    <h3>Alec Nikoghossian</h3>
+                    <p>Producer & Sound Designer</p>
+                    <a href="#" class="portfolio-btn">Portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer" id="footer-contact">
+            filmbyfusion@gmail.com
+        </div>
+    </div>
 
     <div class="preview" id="preview">
-        <img src="" alt="Preview" style="width: 100%;">
-    </div>
-
-    <div class="footer" id="footer-contact">
-        filmbyfusion@gmail.com
+        <img src="" alt="" style="width:100%;">
     </div>
 
     <script>
@@ -269,7 +265,7 @@
         const films = document.querySelectorAll('.film');
 
         window.addEventListener('mousemove', (e) => {
-            if (preview && preview.style.opacity === '1') {
+            if (preview.style.opacity === '1') {
                 const x = e.clientX;
                 const y = e.clientY;
                 const yOffset = preview.offsetHeight / 2;
