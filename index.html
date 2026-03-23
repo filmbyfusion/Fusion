@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVIGATION - SCROLLS AWAY (Vanishes when you scroll down) */
+        /* NAVIGATION - SCROLLS AWAY */
         .nav-header {
             position: absolute; 
             top: 0;
@@ -39,7 +39,7 @@
         }
 
         .logo {
-            width: 476px; /* 1.7x Size */
+            width: 476px; 
             height: auto;
             display: block;
         }
@@ -53,14 +53,12 @@
         .nav-link {
             text-decoration: none;
             color: #ffffff;
-            font-size: 22.4px; /* 1.4x Size */
+            font-size: 22.4px; 
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: opacity 0.3s;
         }
-
-        .nav-link:hover { opacity: 0.5; }
 
         /* MAIN CONTENT */
         .main {
@@ -76,6 +74,7 @@
             border-bottom: 2px solid rgba(0,0,0,0.1);
             transition: 0.4s;
             cursor: pointer;
+            position: relative;
         }
 
         .film:hover {
@@ -103,18 +102,12 @@
             font-weight: 700;
             margin-bottom: 80px;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 80px;
-        }
-
-        .member-card {
-            display: flex;
-            flex-direction: column;
         }
 
         .member-img {
@@ -132,23 +125,8 @@
             transform: scale(1.02);
         }
 
-        .member-name {
-            font-size: 28px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .member-bio {
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            opacity: 0.85;
-            font-weight: 400;
-        }
-
         .portfolio-btn {
-            align-self: flex-start;
+            display: inline-block;
             padding: 12px 30px;
             border: 1px solid #fff;
             color: #fff;
@@ -158,12 +136,33 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: 0.3s;
-            background: rgba(0,0,0,0.05);
         }
 
         .portfolio-btn:hover {
             background: #fff;
             color: #000;
+        }
+
+        /* FOOTER EMAIL STYLING */
+        .footer {
+            padding: 150px 60px 120px;
+            text-align: center;
+        }
+
+        .footer-email {
+            color: #ffffff;
+            /* 1.5x larger than standard text (approx 24px) */
+            font-size: 24px; 
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: opacity 0.3s;
+        }
+
+        .footer-email:hover {
+            opacity: 0.7;
         }
 
         /* PREVIEW POPUP */
@@ -172,23 +171,21 @@
             width: 550px;
             pointer-events: none;
             opacity: 0;
-            z-index: 100;
+            z-index: 999;
             transition: opacity 0.3s ease;
             box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            /* Ensure it appears above the background but follows mouse */
         }
 
-        .footer {
-            padding: 150px 60px 80px;
-            text-align: center;
-            opacity: 0.6;
-            letter-spacing: 3px;
+        #preview img {
+            width: 100%;
+            display: block;
         }
 
         @media(max-width: 900px) {
             .logo { width: 280px; }
-            .nav-header { padding: 20px 30px; }
             .main { padding-top: 300px; }
-            .team-grid { gap: 40px; }
+            #preview { width: 300px; }
         }
     </style>
 </head>
@@ -203,15 +200,9 @@
     </nav>
 
     <div class="main">
-        <a href="https://www.youtube.com/watch?v=cB0-g6u-kO4" target="_blank" style="text-decoration:none; color:inherit;">
-            <div class="film" data-img="images/RaymondLeigh.png">Raymond Leigh <span class="year">2026</span></div>
-        </a>
-        <a href="https://vimeo.com/1122986082" target="_blank" style="text-decoration:none; color:inherit;">
-            <div class="film" data-img="images/Arlo.png">Arlo <span class="year">2025</span></div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=rN5POyiLMTM" target="_blank" style="text-decoration:none; color:inherit;">
-            <div class="film" data-img="images/Mutek.png">MUTEK <span class="year">2024</span></div>
-        </a>
+        <div class="film" data-img="images/RaymondLeigh.png">Raymond Leigh <span class="year">2026</span></div>
+        <div class="film" data-img="images/Arlo.png">Arlo <span class="year">2025</span></div>
+        <div class="film" data-img="images/Mutek.png">MUTEK <span class="year">2024</span></div>
     </div>
 
     <section class="team-section" id="team">
@@ -220,48 +211,60 @@
             
             <div class="member-card">
                 <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
-                <h3 class="member-name">Jérémie Urbain</h3>
-                <p class="member-bio">Jérémie Urbain is a filmmaker from Paris and New York City, currently based in Montréal. Urbain's works blend experimental filmmaking with a narrative lens. Letting the imagery allure the audience is key throughout his pieces. Urbain's practice, often opting for beauty over narrative, relies heavily on editing, whether it be layering, colour grading or continuity. Urbain holds a bachelor's degree in Film Production from the Mel Hoppenheim School of Cinema.</p>
+                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">JÉRÉMIE URBAIN</h3>
+                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Jérémie Urbain is a filmmaker from Paris and New York City, currently based in Montréal. Urbain's works blend experimental filmmaking with a narrative lens. Letting the imagery allure the audience is key throughout his pieces. Urbain's practice, often opting for beauty over narrative, relies heavily on editing, whether it be layering, colour grading or continuity. Urbain holds a bachelor's degree in Film Production from the Mel Hoppenheim School of Cinema.</p>
                 <a href="https://jeremieurbain.github.io/jeremieurbain/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
                 <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
-                <h3 class="member-name">Samuel Brichet</h3>
-                <p class="member-bio">My name is Samuel Brichet, I am a french filmmaker. I studied in Los Angeles and graduated film school at Concordia University, Montreal. My work mainly revolves around narrative fiction and commercial projects.</p>
+                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">SAMUEL BRICHET</h3>
+                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">My name is Samuel Brichet, I am a french filmmaker. I studied in Los Angeles and graduated film school at Concordia University, Montreal. My work mainly revolves around narrative fiction and commercial projects.</p>
                 <a href="https://samuelbrichet.netlify.app/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
                 <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
-                <h3 class="member-name">Alec Nikoghossian</h3>
-                <p class="member-bio">Alec Nikoghossian is a film and commercial director + editor, born in Beirut, Lebanon and now based in Montréal, Canada. He graduated with a BFA in Film Production from Concordia University’s Mel Hoppenheim School of Cinema. Inspired by life across two ends of the world, he pulls from personal history to revisit the city of Beirut through film; guided by nostalgia and fragmented memories from Armenian family stories.</p>
+                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">ALEC NIKOGHOSSIAN</h3>
+                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Alec Nikoghossian is a film and commercial director + editor, born in Beirut, Lebanon and now based in Montréal, Canada. He graduated with a BFA in Film Production from Concordia University’s Mel Hoppenheim School of Cinema. Inspired by life across two ends of the world, he pulls from personal history to revisit the city of Beirut through film; guided by nostalgia and fragmented memories from Armenian family stories.</p>
                 <a href="https://alecniko.com/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
             
         </div>
     </section>
 
-    <div class="footer" id="footer-contact">filmbyfusion@gmail.com</div>
+    <div class="footer" id="footer-contact">
+        <a href="mailto:filmbyfusion@gmail.com" class="footer-email">filmbyfusion@gmail.com</a>
+    </div>
 
-    <img id="preview" src="" alt="">
+    <div id="preview">
+        <img src="" alt="Film Preview">
+    </div>
 
     <script>
         const preview = document.getElementById('preview');
+        const previewImg = preview.querySelector('img');
         const films = document.querySelectorAll('.film');
 
+        // Handles the image showing up and following the cursor
         window.addEventListener('mousemove', (e) => {
             if (preview.style.opacity === '1') {
-                preview.style.left = (e.clientX + 30) + 'px';
-                preview.style.top = (e.clientY - preview.offsetHeight / 2) + 'px';
+                const x = e.clientX;
+                const y = e.clientY;
+                
+                // Offset so the image doesn't sit directly under the cursor
+                preview.style.left = (x + 40) + 'px';
+                preview.style.top = (y - (preview.offsetHeight / 2)) + 'px';
             }
         });
 
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                preview.src = film.getAttribute('data-img');
+                const imgSource = film.getAttribute('data-img');
+                previewImg.src = imgSource;
                 preview.style.opacity = '1';
             });
+            
             film.addEventListener('mouseleave', () => {
                 preview.style.opacity = '0';
             });
