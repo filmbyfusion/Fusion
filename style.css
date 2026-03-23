@@ -11,20 +11,21 @@ html {
 }
 
 body {
-    background: white;
-    color: black;
+    background: #000; /* Dark background for white logo */
+    color: #fff;       /* White text */
     overflow-x: hidden;
-    cursor: none;
 }
 
 /* Custom Arrow Cursor */
 #custom-cursor {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 0;
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 18px solid black;
+    border-bottom: 18px solid #fff; /* White cursor for black background */
     transform: rotate(-30deg);
     pointer-events: none;
     z-index: 9999;
@@ -40,25 +41,27 @@ body {
     z-index: 10;
 }
 
+/* Logo Image Styling */
 .logo {
-    font-size: 120px;
-    letter-spacing: 20px;
-    font-weight: 600;
+    width: 280px; /* Adjust size here */
+    height: auto;
+    display: block;
 }
 
 .contact-link {
     text-decoration: none;
     color: inherit;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 3px;
     transition: opacity 0.3s;
+    opacity: 0.7;
 }
 
-.contact-link:hover { opacity: 0.5; }
+.contact-link:hover { opacity: 1; }
 
 .main {
-    padding: 220px 60px;
-    width: 50%;
+    padding: 280px 60px 100px;
+    width: 60%;
 }
 
 .film-link {
@@ -67,28 +70,33 @@ body {
 }
 
 .film {
-    font-size: 32px;
-    padding: 20px 0;
-    transition: .25s;
+    font-size: 42px;
+    padding: 25px 0;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .film:hover {
-    color: #ff2bd6;
+    color: #ff2bd6; /* Pink hover state */
+    transform: translateX(20px);
 }
 
 .year {
     font-size: 14px;
-    margin-left: 10px;
-    opacity: .5;
+    margin-left: 15px;
+    opacity: .4;
+    font-weight: normal;
 }
 
 .preview {
     position: fixed;
-    width: 520px;
+    width: 500px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .15s ease-out;
+    transition: opacity .2s ease-out;
     z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .preview img {
@@ -104,8 +112,9 @@ body {
 }
 
 @media(max-width:900px) {
-    .logo { font-size: 60px; }
-    .main { width: 100%; padding: 160px 30px; }
+    .logo { width: 160px; }
+    .main { width: 100%; padding: 180px 30px; }
+    .film { font-size: 28px; }
     .preview { display: none; }
     html, body { cursor: auto; }
     #custom-cursor { display: none; }
