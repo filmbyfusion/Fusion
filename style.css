@@ -119,3 +119,9 @@ body {
     html, body { cursor: auto; }
     #custom-cursor { display: none; }
 }
+.logo {
+    width: 280px; 
+    height: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast; /* Keeps the edges of the letters sharp */
+}
