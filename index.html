@@ -6,7 +6,6 @@
     <title>FUSION | Production Co.</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 1. RESET & BASE */
         * {
             margin: 0;
             padding: 0;
@@ -14,26 +13,24 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
+        /* 1. THE BACKGROUND LAYER */
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Sits behind everything */
             background-color: #999;
-        }
-
-        body {
-            /* HIGH-TEXTURE CHROME BACKGROUND */
             background-image: 
                 linear-gradient(115deg, rgba(255,255,255,0.8) 0%, rgba(150,150,150,0.2) 20%, rgba(255,255,255,0.8) 40%, rgba(100,100,100,0.5) 60%, rgba(255,255,255,0.8) 80%, rgba(150,150,150,0.2) 100%),
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-blend-mode: overlay;
-            background-attachment: fixed;
-            color: #1a1a1a;
-            overflow-x: hidden;
         }
 
-        /* 2. THE LOGO & NAV - FORCED TOP-LEVEL FIX */
-        .fixed-nav-container {
-            position: fixed; /* This pins it to the viewport, not the document */
+        /* 2. THE NAV LAYER - PUNCTURED TO VIEWPORT */
+        .nav-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -41,15 +38,15 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            z-index: 99999; /* Overrides everything */
-            pointer-events: none; /* Allows scrolling 'through' the bar */
+            z-index: 10000; /* Extremely high z-index */
+            pointer-events: none; /* Allows clicking content underneath empty space */
         }
 
         .logo {
-            width: 476px; /* 1.7x original size */
+            width: 476px;
             height: auto;
-            display: block;
             pointer-events: auto; /* Makes logo clickable */
+            display: block;
         }
 
         .nav-links {
@@ -61,145 +58,107 @@
 
         .nav-link {
             text-decoration: none;
-            color: #ffffff; /* Forced White */
-            font-size: 22.4px; /* 1.4x size */
-            letter-spacing: 2px;
+            color: #ffffff;
+            font-size: 22.4px;
             font-weight: 700;
             text-transform: uppercase;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
             transition: 0.3s;
         }
 
-        .nav-link:hover {
-            opacity: 0.5;
-        }
+        .nav-link:hover { opacity: 0.5; }
 
-        /* 3. CONTENT AREAS */
-        .content-wrapper {
+        /* 3. THE SCROLLING CONTENT LAYER */
+        .scroll-content {
             position: relative;
+            z-index: 1;
+            padding-top: 550px; /* Space for the 1.7x Logo */
             width: 100%;
-            z-index: 1; /* Sits behind the fixed-nav-container */
         }
 
-        .main {
-            padding: 500px 60px 100px; /* Pushes list below the massive logo */
-            max-width: 1600px;
-        }
-
-        .film-link {
-            text-decoration: none;
-            color: inherit;
+        .main-list {
+            padding: 0 60px 100px;
+            max-width: 1400px;
         }
 
         .film {
-            font-size: clamp(36px, 6vw, 70px);
-            padding: 45px 0;
-            font-weight: 700;
+            font-size: clamp(32px, 5vw, 60px);
+            padding: 40px 0;
             text-transform: uppercase;
+            font-weight: 700;
             border-bottom: 2px solid rgba(0,0,0,0.1);
-            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            transition: 0.4s;
+            color: #1a1a1a;
         }
 
         .film:hover {
             color: #ffffff;
-            transform: translateX(30px);
-            text-shadow: 0 0 30px rgba(255,255,255,0.6);
+            transform: translateX(20px);
         }
 
-        .year {
-            font-size: 0.25em;
-            margin-left: 20px;
-            opacity: 0.4;
-            vertical-align: middle;
-        }
+        .year { font-size: 0.3em; opacity: 0.4; margin-left: 15px; }
 
-        /* 4. TEAM SECTION */
+        /* TEAM SECTION */
         .team-section {
-            padding: 120px 60px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .team-title {
-            font-size: 48px;
-            margin-bottom: 80px;
-            text-transform: uppercase;
+            padding: 100px 60px;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
 
-        .member-card {
-            padding: 20px;
-        }
-
-        .member-img {
+        .member-card img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: 0.5s;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
         }
 
-        .member-card:hover .member-img {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-        }
+        .member-card:hover img { filter: grayscale(0%); }
 
         .portfolio-btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 28px;
-            border: 1px solid #ffffff;
-            color: #ffffff;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 1px solid #fff;
+            color: #fff;
             text-decoration: none;
             font-weight: 700;
+            font-size: 12px;
             text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 2px;
-            transition: 0.3s;
         }
 
-        .portfolio-btn:hover {
-            background: #ffffff;
-            color: #000;
-        }
-
-        /* 5. PREVIEW & FOOTER */
-        .preview {
+        /* PREVIEW POPUP */
+        #preview {
             position: fixed;
-            width: 550px;
+            width: 500px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity .3s;
-            z-index: 100;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            z-index: 5000;
+            transition: opacity 0.3s;
         }
 
-        .footer {
-            padding: 150px 60px 80px;
-            text-align: center;
-            opacity: 0.5;
-            letter-spacing: 3px;
-        }
+        .footer { padding: 100px 60px; text-align: center; opacity: 0.6; }
 
-        @media(max-width:1000px) {
-            .fixed-nav-container { padding: 20px 30px; }
+        @media(max-width: 900px) {
             .logo { width: 280px; }
-            .nav-link { font-size: 18px; }
-            .main { padding-top: 300px; }
+            .nav-container { padding: 20px; }
+            .scroll-content { padding-top: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="fixed-nav-container">
+    <div class="bg-layer"></div>
+
+    <div class="nav-container">
         <img src="images/Fusionlogo_v2.png" alt="FUSION" class="logo">
         <div class="nav-links">
             <a href="#team" class="nav-link">TEAM</a>
@@ -207,76 +166,56 @@
         </div>
     </div>
 
-    <div class="content-wrapper">
-        <div class="main">
-            <a href="https://www.youtube.com/watch?v=cB0-g6u-kO4" target="_blank" class="film-link">
-                <div class="film" data-img="images/RaymondLeigh.png">
-                    Raymond Leigh <span class="year">2026</span>
-                </div>
-            </a>
-            <a href="https://vimeo.com/1122986082" target="_blank" class="film-link">
-                <div class="film" data-img="images/Arlo.png">
-                    Arlo <span class="year">2025</span>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=rN5POyiLMTM" target="_blank" class="film-link">
-                <div class="film" data-img="images/Mutek.png">
-                    MUTEK <span class="year">2024</span>
-                </div>
-            </a>
+    <div class="scroll-content">
+        <div class="main-list">
+            <div class="film" data-img="images/RaymondLeigh.png">Raymond Leigh <span class="year">2026</span></div>
+            <div class="film" data-img="images/Arlo.png">Arlo <span class="year">2025</span></div>
+            <div class="film" data-img="images/Mutek.png">MUTEK <span class="year">2024</span></div>
         </div>
 
         <section class="team-section" id="team">
-            <h2 class="team-title">TEAM</h2>
+            <h2 style="font-size: 40px;">TEAM</h2>
             <div class="team-grid">
                 <div class="member-card">
-                    <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
+                    <img src="images/jeremie.jpg" alt="Jérémie">
                     <h3>Jérémie Urbain</h3>
-                    <p>Creative Director & Cinematographer</p>
+                    <p>Director & Cinematographer</p>
                     <a href="#" class="portfolio-btn">Portfolio</a>
                 </div>
                 <div class="member-card">
-                    <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
+                    <img src="images/samuel.jpg" alt="Samuel">
                     <h3>Samuel Brichet</h3>
                     <p>Lead Editor & Motion Design</p>
                     <a href="#" class="portfolio-btn">Portfolio</a>
                 </div>
                 <div class="member-card">
-                    <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
+                    <img src="images/alec.jpg" alt="Alec">
                     <h3>Alec Nikoghossian</h3>
-                    <p>Producer & Sound Designer</p>
+                    <p>Producer & Sound Design</p>
                     <a href="#" class="portfolio-btn">Portfolio</a>
                 </div>
             </div>
         </section>
 
-        <div class="footer" id="footer-contact">
-            filmbyfusion@gmail.com
-        </div>
+        <div class="footer" id="footer-contact">filmbyfusion@gmail.com</div>
     </div>
 
-    <div class="preview" id="preview">
-        <img src="" alt="" style="width:100%;">
-    </div>
+    <img id="preview" src="" alt="">
 
     <script>
         const preview = document.getElementById('preview');
-        const previewImg = preview.querySelector('img');
         const films = document.querySelectorAll('.film');
 
         window.addEventListener('mousemove', (e) => {
             if (preview.style.opacity === '1') {
-                const x = e.clientX;
-                const y = e.clientY;
-                const yOffset = preview.offsetHeight / 2;
-                preview.style.left = (x + 40) + 'px';
-                preview.style.top = (y - yOffset) + 'px';
+                preview.style.left = (e.clientX + 30) + 'px';
+                preview.style.top = (e.clientY - preview.offsetHeight / 2) + 'px';
             }
         });
 
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                previewImg.src = film.getAttribute('data-img');
+                preview.src = film.getAttribute('data-img');
                 preview.style.opacity = '1';
             });
             film.addEventListener('mouseleave', () => {
