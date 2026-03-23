@@ -14,7 +14,7 @@
         }
 
         body {
-            /* CHROME TEXTURE BACKGROUND */
+            /* HIGH-TEXTURE CHROME BACKGROUND */
             background-color: #999;
             background-image: 
                 linear-gradient(115deg, rgba(255,255,255,0.8) 0%, rgba(150,150,150,0.2) 20%, rgba(255,255,255,0.8) 40%, rgba(100,100,100,0.5) 60%, rgba(255,255,255,0.8) 80%, rgba(150,150,150,0.2) 100%),
@@ -25,9 +25,9 @@
             overflow-x: hidden;
         }
 
-        /* NAVIGATION - SCROLLS AWAY */
+        /* NAVIGATION - SCROLLS AWAY (Vanishes when you scroll down) */
         .nav-header {
-            position: absolute; /* Changed from fixed to absolute */
+            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
@@ -60,19 +60,17 @@
             transition: opacity 0.3s;
         }
 
-        .nav-link:hover {
-            opacity: 0.5;
-        }
+        .nav-link:hover { opacity: 0.5; }
 
         /* MAIN CONTENT */
         .main {
-            padding: 500px 60px 100px;
+            padding: 550px 60px 100px;
             max-width: 1600px;
         }
 
         .film {
             font-size: clamp(32px, 5vw, 64px);
-            padding: 40px 0;
+            padding: 45px 0;
             text-transform: uppercase;
             font-weight: 700;
             border-bottom: 2px solid rgba(0,0,0,0.1);
@@ -95,62 +93,102 @@
         /* TEAM SECTION */
         .team-section {
             padding: 120px 60px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .team-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 60px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 80px;
         }
 
-        .member-card img {
+        .member-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: 0.5s;
-            margin-bottom: 20px;
+            transition: 0.6s ease;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .member-card:hover img {
+        .member-card:hover .member-img {
             filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .member-name {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .member-bio {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            opacity: 0.85;
+            font-weight: 400;
         }
 
         .portfolio-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 25px;
+            align-self: flex-start;
+            padding: 12px 30px;
             border: 1px solid #fff;
             color: #fff;
             text-decoration: none;
             font-weight: 700;
-            text-transform: uppercase;
             font-size: 11px;
+            text-transform: uppercase;
             letter-spacing: 2px;
+            transition: 0.3s;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .portfolio-btn:hover {
+            background: #fff;
+            color: #000;
         }
 
         /* PREVIEW POPUP */
         #preview {
             position: fixed;
-            width: 500px;
+            width: 550px;
             pointer-events: none;
             opacity: 0;
             z-index: 100;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
         }
 
         .footer {
-            padding: 100px 60px;
+            padding: 150px 60px 80px;
             text-align: center;
-            opacity: 0.5;
+            opacity: 0.6;
+            letter-spacing: 3px;
         }
 
         @media(max-width: 900px) {
             .logo { width: 280px; }
+            .nav-header { padding: 20px 30px; }
             .main { padding-top: 300px; }
+            .team-grid { gap: 40px; }
         }
     </style>
 </head>
@@ -165,32 +203,42 @@
     </nav>
 
     <div class="main">
-        <div class="film" data-img="images/RaymondLeigh.png">Raymond Leigh <span class="year">2026</span></div>
-        <div class="film" data-img="images/Arlo.png">Arlo <span class="year">2025</span></div>
-        <div class="film" data-img="images/Mutek.png">MUTEK <span class="year">2024</span></div>
+        <a href="https://www.youtube.com/watch?v=cB0-g6u-kO4" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="film" data-img="images/RaymondLeigh.png">Raymond Leigh <span class="year">2026</span></div>
+        </a>
+        <a href="https://vimeo.com/1122986082" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="film" data-img="images/Arlo.png">Arlo <span class="year">2025</span></div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=rN5POyiLMTM" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="film" data-img="images/Mutek.png">MUTEK <span class="year">2024</span></div>
+        </a>
     </div>
 
     <section class="team-section" id="team">
-        <h2 style="font-size: 48px;">TEAM</h2>
+        <h2 class="team-title">TEAM</h2>
         <div class="team-grid">
+            
             <div class="member-card">
-                <img src="images/jeremie.jpg" alt="Jérémie">
-                <h3>Jérémie Urbain</h3>
-                <p>Creative Director & Cinematographer</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
+                <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
+                <h3 class="member-name">Jérémie Urbain</h3>
+                <p class="member-bio">Jérémie Urbain is a filmmaker from Paris and New York City, currently based in Montréal. Urbain's works blend experimental filmmaking with a narrative lens. Letting the imagery allure the audience is key throughout his pieces. Urbain's practice, often opting for beauty over narrative, relies heavily on editing, whether it be layering, colour grading or continuity. Urbain holds a bachelor's degree in Film Production from the Mel Hoppenheim School of Cinema.</p>
+                <a href="https://jeremieurbain.github.io/jeremieurbain/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
+
             <div class="member-card">
-                <img src="images/samuel.jpg" alt="Samuel">
-                <h3>Samuel Brichet</h3>
-                <p>Lead Editor & Motion Design</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
+                <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
+                <h3 class="member-name">Samuel Brichet</h3>
+                <p class="member-bio">My name is Samuel Brichet, I am a french filmmaker. I studied in Los Angeles and graduated film school at Concordia University, Montreal. My work mainly revolves around narrative fiction and commercial projects.</p>
+                <a href="https://samuelbrichet.netlify.app/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
+
             <div class="member-card">
-                <img src="images/alec.jpg" alt="Alec">
-                <h3>Alec Nikoghossian</h3>
-                <p>Producer & Sound Design</p>
-                <a href="#" class="portfolio-btn">Portfolio</a>
+                <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
+                <h3 class="member-name">Alec Nikoghossian</h3>
+                <p class="member-bio">Alec Nikoghossian is a film and commercial director + editor, born in Beirut, Lebanon and now based in Montréal, Canada. He graduated with a BFA in Film Production from Concordia University’s Mel Hoppenheim School of Cinema. Inspired by life across two ends of the world, he pulls from personal history to revisit the city of Beirut through film; guided by nostalgia and fragmented memories from Armenian family stories.</p>
+                <a href="https://alecniko.com/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
+            
         </div>
     </section>
 
