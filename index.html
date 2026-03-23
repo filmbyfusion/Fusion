@@ -29,50 +29,53 @@
             overflow-x: hidden;
         }
 
-        /* STICKY NAVIGATION */
+        /* FIXED NAVIGATION - PINNED TO TOP */
         .nav {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 30px 60px;
+            padding: 40px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000; /* Ensure it stays above everything */
-            background: transparent; 
+            z-index: 9999; /* Highest priority */
+            pointer-events: none; /* Allows clicking through the empty space of the nav bar */
         }
 
         .logo {
             width: 476px; 
             height: auto;
             display: block;
+            pointer-events: auto; /* Re-enable clicking for logo */
         }
 
         .nav-links {
             display: flex;
             gap: 50px;
+            pointer-events: auto; /* Re-enable clicking for links */
         }
 
         .nav-link {
             text-decoration: none;
-            /* Force color to White as requested */
-            color: #ffffff; 
+            color: #ffffff; /* Explicitly White */
             font-size: 22.4px; 
             letter-spacing: 2px;
             transition: 0.3s;
             font-weight: 700; 
             text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
 
         .nav-link:hover {
-            opacity: 0.7;
-            text-shadow: 0 0 15px rgba(255,255,255,0.8);
+            opacity: 0.6;
+            color: #ffffff;
         }
 
+        /* CONTENT SPACING */
         .main {
-            padding: 450px 60px 100px;
-            width: 70%;
+            padding: 550px 60px 100px; /* Large padding to clear the 1.7x logo */
+            width: 80%;
         }
 
         .film-link {
@@ -81,8 +84,8 @@
         }
 
         .film {
-            font-size: 48px;
-            padding: 30px 0;
+            font-size: 56px;
+            padding: 40px 0;
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -92,109 +95,129 @@
 
         .film:hover {
             color: #ffffff; 
-            transform: translateX(15px);
-            text-shadow: 0 0 20px rgba(255,255,255,0.4);
+            transform: translateX(20px);
+            text-shadow: 0 0 25px rgba(255,255,255,0.5);
         }
 
         .year {
-            font-size: 14px;
+            font-size: 16px;
             margin-left: 15px;
-            opacity: .6;
+            opacity: .5;
             font-weight: 400;
         }
 
-        /* TEAM SECTION STYLES */
+        /* TEAM SECTION */
         .team-section {
-            padding: 100px 60px;
-            border-top: 2px solid rgba(0,0,0,0.1);
+            padding: 120px 60px;
+            background: rgba(0,0,0,0.03);
         }
 
         .team-title {
             font-size: 48px;
             font-weight: 700;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 60px;
         }
 
         .member-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 2px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: 0.3s;
+            transition: transform 0.4s ease;
         }
 
         .member-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+        }
+
+        .member-img-container {
+            width: 100%;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .member-img {
             width: 100%;
-            aspect-ratio: 1/1;
+            height: 100%;
             object-fit: cover;
-            margin-bottom: 20px;
             filter: grayscale(100%);
-            transition: 0.3s;
+            transition: 0.6s ease;
         }
 
         .member-card:hover .member-img {
             filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
         .member-name {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 10px;
             text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            opacity: 0.6;
         }
 
         .member-bio {
             font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.8;
+            margin-bottom: 25px;
             opacity: 0.8;
         }
 
-        .portfolio-link {
-            display: inline-block;
+        .portfolio-btn {
             color: #ffffff;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 12px;
+            font-weight: 700;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            border-bottom: 1px solid #ffffff;
-            padding-bottom: 2px;
+            border: 1px solid #ffffff;
+            padding: 12px 25px;
+            display: inline-block;
+            transition: 0.3s;
         }
 
+        .portfolio-btn:hover {
+            background: #ffffff;
+            color: #000;
+        }
+
+        /* PREVIEW POPUP */
         .preview {
             position: fixed;
-            width: 520px;
+            width: 550px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity .3s ease;
+            transition: opacity .4s ease;
             z-index: 100;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
         }
 
         .footer {
             padding: 100px 60px;
             font-size: 14px;
-            letter-spacing: 2px;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            letter-spacing: 3px;
+            text-align: center;
         }
 
-        @media(max-width:1100px) {
+        @media(max-width:1200px) {
             .team-grid { grid-template-columns: 1fr; }
-            .logo { width: 300px; }
-            .main { padding-top: 300px; }
+            .logo { width: 320px; }
+            .main { padding-top: 350px; }
+            .nav { padding: 20px 30px; }
         }
     </style>
 </head>
@@ -230,24 +253,33 @@
         <h2 class="team-title">TEAM</h2>
         <div class="team-grid">
             <div class="member-card">
-                <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
+                <div class="member-img-container">
+                    <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
+                </div>
                 <h3 class="member-name">Jérémie Urbain</h3>
-                <p class="member-bio">Creative Director and Cinematographer specializing in high-contrast visual storytelling and industrial aesthetics.</p>
-                <a href="#" class="portfolio-link">View Portfolio</a>
+                <p class="member-role">Director / Cinematographer</p>
+                <p class="member-bio">Visionary lead focusing on the intersection of raw industrial textures and high-fashion visual narratives.</p>
+                <a href="#" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
-                <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
+                <div class="member-img-container">
+                    <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
+                </div>
                 <h3 class="member-name">Samuel Brichet</h3>
-                <p class="member-bio">Lead Editor and Motion Designer with a focus on rhythmic pacing and immersive post-production techniques.</p>
-                <a href="#" class="portfolio-link">View Portfolio</a>
+                <p class="member-role">Editor / Visual Effects</p>
+                <p class="member-bio">Crafting the rhythm of Fusion through precision editing and immersive motion design work.</p>
+                <a href="#" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
-                <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
+                <div class="member-img-container">
+                    <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
+                </div>
                 <h3 class="member-name">Alec Nikoghossian</h3>
-                <p class="member-bio">Production Lead and Sound Designer, ensuring every frame is supported by a rich, cinematic auditory experience.</p>
-                <a href="#" class="portfolio-link">View Portfolio</a>
+                <p class="member-role">Producer / Sound Design</p>
+                <p class="member-bio">The backbone of production, blending logistical mastery with cinematic soundscapes.</p>
+                <a href="#" class="portfolio-btn">Portfolio</a>
             </div>
         </div>
     </section>
@@ -280,8 +312,7 @@
 
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                const imgPath = film.getAttribute('data-img');
-                previewImg.src = imgPath;
+                previewImg.src = film.getAttribute('data-img');
                 preview.style.opacity = '1';
             });
             film.addEventListener('mouseleave', () => {
