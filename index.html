@@ -4,52 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUSION | Production Co.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Futura, "Futura PT", "Helvetica Neue", Arial, sans-serif;
+            /* Applied Poppins globally */
+            font-family: 'Poppins', sans-serif;
         }
 
         html {
             scroll-behavior: smooth;
-            cursor: none; 
+            cursor: auto; /* Default cursor restored */
         }
 
         body {
-            /* SHINY CHROME GRADIENT */
-            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #d1d1d6 45%, #8e8e93 100%);
+            /* SHINY CHROME WITH BRUSHED TEXTURE */
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(135deg, #e0e0e2 0%, #b8b8ba 25%, #d1d1d3 50%, #959597 75%, #c0c0c2 100%);
+            background-size: 4px 4px, 4px 4px, 100% 100%;
             background-attachment: fixed;
-            color: #000; /* Black text looks better on Chrome than white */
+            color: #1a1a1a; /* Deep charcoal for readability on chrome */
             overflow-x: hidden;
-        }
-
-        #custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 18px solid #000; /* Black cursor to match text */
-            transform: rotate(-30deg);
-            pointer-events: none;
-            z-index: 9999;
         }
 
         .nav {
             position: fixed;
             width: 100%;
-            padding: 20px 60px;
+            padding: 30px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
+            /* Subtle glassmorphism so nav stays visible during scroll */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
 
-        /* LOGO: 1.7x size (476px) */
+        /* LOGO: 1.7x size */
         .logo {
             width: 476px; 
             height: auto;
@@ -64,21 +59,22 @@
         .nav-link {
             text-decoration: none;
             color: inherit;
-            font-size: 18px;
-            letter-spacing: 3px;
+            font-size: 16px;
+            letter-spacing: 2px;
             transition: 0.3s;
-            opacity: 0.8;
+            opacity: 0.7;
             font-weight: 600;
         }
 
-        /* TEAM & CONTACT hover color matches Film Titles */
+        /* Hover: White instead of Pink */
         .nav-link:hover {
             opacity: 1;
-            color: #ff2bd6; 
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
         .main {
-            padding: 450px 60px 100px; /* Extra padding for the massive logo */
+            padding: 450px 60px 100px;
             width: 60%;
         }
 
@@ -88,33 +84,38 @@
         }
 
         .film {
-            font-size: 42px;
-            padding: 25px 0;
+            font-size: 48px;
+            padding: 30px 0;
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
+        /* Hover: White instead of Pink */
         .film:hover {
-            color: #ff2bd6; 
-            transform: translateX(20px);
+            color: #ffffff; 
+            transform: translateX(15px);
+            text-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
         .year {
             font-size: 14px;
             margin-left: 15px;
             opacity: .5;
+            font-weight: 300;
         }
 
         .preview {
             position: fixed;
-            width: 500px;
+            width: 520px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity .2s ease-out;
+            transition: opacity .3s ease;
             z-index: 100;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .preview img {
@@ -123,23 +124,21 @@
         }
 
         .footer {
-            padding: 200px 60px 100px;
+            padding: 150px 60px 80px;
             font-size: 14px;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            font-weight: 400;
         }
 
         @media(max-width:900px) {
-            .logo { width: 250px; } 
-            .main { padding-top: 250px; }
+            .logo { width: 280px; } 
+            .main { padding-top: 250px; width: 90%; }
+            .film { font-size: 32px; }
             .preview { display: none; }
-            html, body { cursor: auto; }
-            #custom-cursor { display: none; }
         }
     </style>
 </head>
 <body>
-
-    <div id="custom-cursor"></div>
 
     <div class="nav">
         <img src="images/Fusionlogo_v2.png" alt="FUSION" class="logo">
@@ -169,40 +168,41 @@
     </div>
 
     <div class="preview" id="preview">
-        <img src="" alt="">
+        <img src="" alt="Preview">
     </div>
 
     <div class="footer" id="footer-contact">
-        <p id="team" style="margin-bottom: 40px; opacity: 0.5;">TEAM SECTION CONTENT GOES HERE</p>
-        filmbyfusion@gmail.com
+        <div id="team" style="margin-bottom: 40px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+            <h3 style="margin-bottom: 10px;">TEAM</h3>
+            <p style="opacity: 0.6;">Production Collective</p>
+        </div>
+        <p>filmbyfusion@gmail.com</p>
     </div>
 
     <script>
-        const cursor = document.getElementById('custom-cursor');
         const preview = document.getElementById('preview');
         const previewImg = preview.querySelector('img');
         const films = document.querySelectorAll('.film');
 
+        // Track mouse for the preview image
         window.addEventListener('mousemove', (e) => {
             const x = e.clientX;
             const y = e.clientY;
             
             requestAnimationFrame(() => {
-                if (cursor) {
-                    cursor.style.left = x + 'px';
-                    cursor.style.top = y + 'px';
-                }
                 if (preview && preview.style.opacity === '1') {
                     const yOffset = preview.offsetHeight / 2;
-                    preview.style.left = (x + 45) + 'px';
+                    preview.style.left = (x + 40) + 'px';
                     preview.style.top = (y - yOffset) + 'px';
                 }
             });
         });
 
+        // Hover logic for Previews
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                previewImg.src = film.getAttribute('data-img');
+                const imgPath = film.getAttribute('data-img');
+                previewImg.src = imgPath;
                 preview.style.opacity = '1';
             });
             film.addEventListener('mouseleave', () => {
