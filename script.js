@@ -3,25 +3,38 @@ const preview = document.getElementById('preview');
 const previewImg = preview.querySelector('img');
 const films = document.querySelectorAll('.film');
 
-// Custom Cursor and Preview Movement
+// Smooth movement logic
 window.addEventListener('mousemove', (e) => {
-    // Move Cursor
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    // Move Preview Image (with offset to stay clear of cursor)
-    preview.style.left = (e.clientX + 40) + 'px';
-    preview.style.top = (e.clientY - (preview.offsetHeight / 2)) + 'px';
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    // Use requestAnimationFrame for smoother rendering
+    requestAnimationFrame(() => {
+        // Move Custom Cursor
+        if (cursor) {
+            cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) rotate(-30deg)`;
+        }
+
+        // Move Preview Image (centered to mouse with offset)
+        if (preview) {
+            const yOffset = preview.offsetHeight / 2;
+            preview.style.left = (mouseX + 45) + 'px';
+            preview.style.top = (mouseY - yOffset) + 'px';
+        }
+    });
 });
 
-// Hover States
+// Hover logic for Film titles
 films.forEach(film => {
     film.addEventListener('mouseenter', () => {
-        preview.style.opacity = 1;
-        previewImg.src = film.dataset.img;
+        const imgPath = film.getAttribute('data-img');
+        if (imgPath) {
+            previewImg.src = imgPath;
+            preview.style.opacity = '1';
+        }
     });
 
     film.addEventListener('mouseleave', () => {
-        preview.style.opacity = 0;
+        preview.style.opacity = '0';
     });
 });
