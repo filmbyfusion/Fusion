@@ -14,7 +14,7 @@
         }
 
         body {
-            /* HIGH-TEXTURE CHROME BACKGROUND */
+            /* CHROME TEXTURE BACKGROUND */
             background-color: #999;
             background-image: 
                 linear-gradient(115deg, rgba(255,255,255,0.8) 0%, rgba(150,150,150,0.2) 20%, rgba(255,255,255,0.8) 40%, rgba(100,100,100,0.5) 60%, rgba(255,255,255,0.8) 80%, rgba(150,150,150,0.2) 100%),
@@ -57,8 +57,10 @@
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: opacity 0.3s;
+            transition: 0.3s;
         }
+
+        .nav-link:hover { opacity: 0.5; }
 
         /* MAIN CONTENT */
         .main {
@@ -74,7 +76,6 @@
             border-bottom: 2px solid rgba(0,0,0,0.1);
             transition: 0.4s;
             cursor: pointer;
-            position: relative;
         }
 
         .film:hover {
@@ -125,6 +126,19 @@
             transform: scale(1.02);
         }
 
+        .member-email {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .member-email:hover { opacity: 1; }
+
         .portfolio-btn {
             display: inline-block;
             padding: 12px 30px;
@@ -136,6 +150,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: 0.3s;
+            margin-top: 10px;
         }
 
         .portfolio-btn:hover {
@@ -143,7 +158,7 @@
             color: #000;
         }
 
-        /* FOOTER EMAIL STYLING */
+        /* FOOTER EMAIL */
         .footer {
             padding: 150px 60px 120px;
             text-align: center;
@@ -151,18 +166,12 @@
 
         .footer-email {
             color: #ffffff;
-            /* 1.5x larger than standard text (approx 24px) */
             font-size: 24px; 
             font-weight: 700;
             text-decoration: none;
             letter-spacing: 3px;
             text-transform: uppercase;
             text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: opacity 0.3s;
-        }
-
-        .footer-email:hover {
-            opacity: 0.7;
         }
 
         /* PREVIEW POPUP */
@@ -174,7 +183,6 @@
             z-index: 999;
             transition: opacity 0.3s ease;
             box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            /* Ensure it appears above the background but follows mouse */
         }
 
         #preview img {
@@ -211,22 +219,25 @@
             
             <div class="member-card">
                 <img src="images/jeremie.jpg" alt="Jérémie Urbain" class="member-img">
-                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">JÉRÉMIE URBAIN</h3>
-                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Jérémie Urbain is a filmmaker from Paris and New York City, currently based in Montréal. Urbain's works blend experimental filmmaking with a narrative lens. Letting the imagery allure the audience is key throughout his pieces. Urbain's practice, often opting for beauty over narrative, relies heavily on editing, whether it be layering, colour grading or continuity. Urbain holds a bachelor's degree in Film Production from the Mel Hoppenheim School of Cinema.</p>
+                <h3 style="font-size: 28px; font-weight: 700; text-transform: uppercase;">JÉRÉMIE URBAIN</h3>
+                <a href="mailto:jeremieurbain@outlook.com" class="member-email">jeremieurbain@outlook.com</a>
+                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Jérémie Urbain is a filmmaker from Paris and New York City, currently based in Montréal. Urbain's works blend experimental filmmaking with a narrative lens. Letting the imagery allure the audience is key throughout his pieces. Urbain holds a bachelor's degree in Film Production from the Mel Hoppenheim School of Cinema.</p>
                 <a href="https://jeremieurbain.github.io/jeremieurbain/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
                 <img src="images/samuel.jpg" alt="Samuel Brichet" class="member-img">
-                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">SAMUEL BRICHET</h3>
+                <h3 style="font-size: 28px; font-weight: 700; text-transform: uppercase;">SAMUEL BRICHET</h3>
+                <a href="mailto:samuel.brichet04@gmail.com" class="member-email">samuel.brichet04@gmail.com</a>
                 <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">My name is Samuel Brichet, I am a french filmmaker. I studied in Los Angeles and graduated film school at Concordia University, Montreal. My work mainly revolves around narrative fiction and commercial projects.</p>
                 <a href="https://samuelbrichet.netlify.app/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
 
             <div class="member-card">
                 <img src="images/alec.jpg" alt="Alec Nikoghossian" class="member-img">
-                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">ALEC NIKOGHOSSIAN</h3>
-                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Alec Nikoghossian is a film and commercial director + editor, born in Beirut, Lebanon and now based in Montréal, Canada. He graduated with a BFA in Film Production from Concordia University’s Mel Hoppenheim School of Cinema. Inspired by life across two ends of the world, he pulls from personal history to revisit the city of Beirut through film; guided by nostalgia and fragmented memories from Armenian family stories.</p>
+                <h3 style="font-size: 28px; font-weight: 700; text-transform: uppercase;">ALEC NIKOGHOSSIAN</h3>
+                <a href="mailto:info@alecn.media" class="member-email">info@alecn.media</a>
+                <p style="font-size: 15px; line-height: 1.7; margin-bottom: 30px; opacity: 0.85;">Alec Nikoghossian is a film and commercial director + editor, born in Beirut, Lebanon and now based in Montréal, Canada. He graduated with a BFA in Film Production from Concordia University’s Mel Hoppenheim School of Cinema. Inspired by life across two ends of the world, he revisit the city of Beirut through film.</p>
                 <a href="https://alecniko.com/" target="_blank" class="portfolio-btn">Portfolio</a>
             </div>
             
@@ -246,25 +257,18 @@
         const previewImg = preview.querySelector('img');
         const films = document.querySelectorAll('.film');
 
-        // Handles the image showing up and following the cursor
         window.addEventListener('mousemove', (e) => {
             if (preview.style.opacity === '1') {
-                const x = e.clientX;
-                const y = e.clientY;
-                
-                // Offset so the image doesn't sit directly under the cursor
-                preview.style.left = (x + 40) + 'px';
-                preview.style.top = (y - (preview.offsetHeight / 2)) + 'px';
+                preview.style.left = (e.clientX + 40) + 'px';
+                preview.style.top = (e.clientY - (preview.offsetHeight / 2)) + 'px';
             }
         });
 
         films.forEach(film => {
             film.addEventListener('mouseenter', () => {
-                const imgSource = film.getAttribute('data-img');
-                previewImg.src = imgSource;
+                previewImg.src = film.getAttribute('data-img');
                 preview.style.opacity = '1';
             });
-            
             film.addEventListener('mouseleave', () => {
                 preview.style.opacity = '0';
             });
